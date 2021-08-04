@@ -11,10 +11,6 @@ jobs:
   build:
     name: Build neovim
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch:
-          - x86_64
 
     container:
       image: 'ghcr.io/void-linux/xbps-src-masterdir@sha256:0e3021fba6415e2e933eecabb28d8f8256e7bd5347e7b281633a61fa42ea3820'
