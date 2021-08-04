@@ -58,6 +58,9 @@ jobs:
       - name: Generate index.html
         run: make tree
 
+      - name: Fix missing release file
+        run : make fix_release
+
       - name: Deploy to Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
