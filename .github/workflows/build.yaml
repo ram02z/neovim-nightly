@@ -1,6 +1,7 @@
 name: Build daily
 on:
-  branches:
+  push:
+    branches:
       - master
   # schedule:
   #   - cron: '0 0 1-31 * *'
