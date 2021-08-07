@@ -38,7 +38,6 @@ version="$version"
 revision=0
 build_style=cmake
 build_helper="qemu"
-configure_args="-DCMAKE_BUILD_TYPE=RelWithDebInfo"
 hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack"
 makedepends="libtermkey-devel libuv-devel libvterm-devel msgpack-devel LuaJIT-devel
  libluv-devel tree-sitter-devel"
@@ -60,6 +59,9 @@ alternatives="
 pre_configure() {
 	vsed -i runtime/CMakeLists.txt \
 		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
+}
+do_build() {
+  vtargetrun make USE_BUNDLED=0 CMAKE_BUILD_TYPE=Release
 }
 post_install() {
 	vlicense LICENSE

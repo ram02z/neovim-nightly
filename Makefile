@@ -7,7 +7,7 @@ template:
 	bash scripts/template.sh
 
 build:
-	./void-packages/xbps-src -a aarch64 pkg nvim
+	./void-packages/xbps-src -a x86_64-musl pkg nvim
 
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
