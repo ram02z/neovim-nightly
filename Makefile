@@ -8,7 +8,7 @@ template:
 
 build:
 	./void-packages/xbps-src binary-bootstrap x86_64-musl
-	./void-packages/xbps-src pkg neovim-nightly
+	./void-packages/xbps-src -a x86_64-musl pkg neovim-nightly
 
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
