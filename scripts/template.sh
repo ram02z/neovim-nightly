@@ -61,7 +61,7 @@ pre_configure() {
 		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
 }
 do_build() {
-  vtargetrun make USE_BUNDLED=0 CMAKE_BUILD_TYPE=Release
+  make USE_BUNDLED=0 CMAKE_BUILD_TYPE=Release
 }
 post_install() {
 	vlicense LICENSE
