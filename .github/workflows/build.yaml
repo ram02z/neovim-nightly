@@ -76,7 +76,7 @@ jobs:
         # run : make fix_release
         
       - name: Check contents of folder
-        run: ll -a ./void-packages/hostdir/binpkgs
+        run: ls -la ./void-packages/hostdir/binpkgs
 
       - name: Deploy to Pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
