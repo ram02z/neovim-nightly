@@ -48,8 +48,7 @@ jobs:
         run: make clone
 
       - name: Configure xbps-src
-        # run: bash scripts/configure.sh
-        run: ln -s / ./void-packages/masterdir
+        run: bash scripts/configure.sh
 
       - name: Generate template
         run: make template
