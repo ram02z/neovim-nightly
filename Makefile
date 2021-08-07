@@ -7,7 +7,6 @@ template:
 	bash scripts/template.sh
 
 build:
-	./void-packages/xbps-src binary-bootstrap x86_64-musl
 	./void-packages/xbps-src pkg neovim-nightly
 
 sign:
