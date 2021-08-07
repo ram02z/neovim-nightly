@@ -1,10 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
 
-old_wd=$(pwd)
+dir=$(pwd)/void-packages
 
-cd $(pwd)/void-packages
-
-./xbps-src -m masterdir-musl binary-bootstrap x86_64-musl
-./xbps-src -m masterdir-musl pkg neovim-nightly
-
-cd $old_wd
+$dir/xbps-src -m $dir/masterdir-musl binary-bootstrap x86_64-musl
+$dir/xbps-src -m $dir/masterdir-musl pkg neovim-nightly
