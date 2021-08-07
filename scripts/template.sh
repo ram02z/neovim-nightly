@@ -60,9 +60,6 @@ pre_configure() {
 	vsed -i runtime/CMakeLists.txt \
 		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
 }
-do_build() {
-  make USE_BUNDLED=0 CMAKE_BUILD_TYPE=RelWithDebInfo
-}
 post_install() {
 	vlicense LICENSE
 }
