@@ -9,6 +9,7 @@ template:
 build:
 	./void-packages/xbps-src pkg neovim-nightly
 
+
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
 	xbps-rindex --privkey private.pem --sign-pkg ./void-packages/hostdir/binpkgs/*.xbps

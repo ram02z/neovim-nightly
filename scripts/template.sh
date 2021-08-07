@@ -19,7 +19,7 @@ echo "version: $version"
 echo "url: $url" echo "long_commit: $url"
 
 builddir=$tmp/build
-tarfile=$builddir/nvim-$version.tar.gz
+tarfile=$builddir/neovim-nightly-$version.tar.gz
 mkdir -p $builddir
 echo "tarfile: $tarfile"
 
@@ -47,7 +47,7 @@ short_desc="Fork of Vim aiming to improve user experience, plugins and GUIs. Nig
 maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="Apache-2.0, custom:Vim"
 homepage="https://neovim.io"
-distfiles="$url>nvim-$version.tar.gz"
+distfiles="$url>neovim-nightly-$version.tar.gz"
 checksum=$sha
 wrksrc=$wrksrc
 conflicts="neovim"
