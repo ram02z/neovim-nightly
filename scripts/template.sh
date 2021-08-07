@@ -26,18 +26,19 @@ echo "tarfile: $tarfile"
 wget $url -O $tarfile
 sha=$(sha256sum $tarfile | awk '{print $1;}')
 tar xfz $tarfile -C $builddir
-wrksrc=$(ls $builddir | grep -v '\.')
+# wrksrc=$(ls $builddir | grep -v '\.')
 
 echo "sha: $sha"
-echo "wrksrc: $wrksrc"
+# echo "wrksrc: $wrksrc"
 
 cat << EOF > $ndir/template
-# Template file for 'nvim', the nightly build of 'neovim'
-pkgname=nvim
+# Template file for 'neovim-nightly', the nightly build of 'neovim'
+pkgname=neovim-nightly
 version="$version"
-revision=0
+revision=1
 build_style=cmake
 build_helper="qemu"
+configure_args="-DCMAKE_BUILD_TYPE=RelWithDebInfo"
 hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack"
 makedepends="libtermkey-devel libuv-devel libvterm-devel msgpack-devel LuaJIT-devel
  libluv-devel tree-sitter-devel"
@@ -48,7 +49,8 @@ license="Apache-2.0, custom:Vim"
 homepage="https://neovim.io"
 distfiles="$url>nvim-$version.tar.gz"
 checksum=$sha
-wrksrc=$wrksrc
+wrksrc="neovim-nightly"
+conflicts="neovim"
 alternatives="
  vi:vi:/usr/bin/nvim
  vi:vi.1:/usr/share/man/man1/nvim.1
