@@ -7,10 +7,10 @@ template:
 	bash scripts/template.sh
 
 build:
-	cd void-packages
+	bash cd ./void-packages
 	./xbps-src -m masterdir-musl binary-bootstrap x86_64-musl
 	./xbps-src -m masterdir-musl pkg neovim-nightly
-	cd ..
+	bash cd ..
 
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
