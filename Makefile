@@ -4,13 +4,14 @@ clone:
 	bash scripts/clone.sh
 
 bootstrap:
-	./void-packages/xbps-src binary-bootstrap
+	./void-packages/xbps-src -m masterdir-x86_64-musl binary-bootstrap x86_64-musl
+
 
 template:
 	bash scripts/template.sh
 
 build:
-	./void-packages/xbps-src -a x86_64-musl pkg nvim
+	./void-packages/xbps-src -m masterdir-x86_64-musl pkg neovim-nightly
 
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
