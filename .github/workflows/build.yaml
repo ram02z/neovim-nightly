@@ -78,9 +78,13 @@ jobs:
       - name: Check contents of folder
         run: ls -la ./void-packages/hostdir/binpkgs
 
-      - name: Deploy to Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
         with:
-          branch: gh-pages
-          folder: void-packages/hostdir/binpkgs
+          target_branch: gh-pages
+          build_dir: void-packages/hostdir/binpkgs
+          jekyll: false
+          verbose: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
