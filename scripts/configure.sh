@@ -7,3 +7,4 @@ echo XBPS_ALLOW_CHROOT_BREAKOUT=yes >> ./void-packages/etc/conf
 ./void-packages/xbps-src zap
 ./void-packages/xbps-src binary-bootstrap x86_64-musl
 ln -s / ./void-packages/masterdir
+
