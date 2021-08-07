@@ -58,10 +58,6 @@ alternatives="
  vi:view.1:/usr/share/man/man1/nvim.1
  vim:vim:/usr/bin/nvim
  vim:vim.1:/usr/share/man/man1/nvim.1"
-pre_configure() {
-	vsed -i runtime/CMakeLists.txt \
-		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
-}
 post_install() {
 	vlicense LICENSE
 }
