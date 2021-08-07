@@ -10,14 +10,11 @@ template:
 	bash scripts/template.sh
 
 build:
-	./void-packages/xbps-src pkg nvim
+	./void-packages/xbps-src -a x86_64-musl pkg nvim
 
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
 	xbps-rindex --privkey private.pem --sign-pkg ./void-packages/hostdir/binpkgs/*.xbps
-
-fix_release:
-	bash scripts/fix_release.sh
 
 tree:
 	bash scripts/tree.sh $$PWD/void-packages/hostdir/binpkgs $$PWD/void-packages/hostdir/binpkgs/ https://ram02z.github.io/nvim-musl
