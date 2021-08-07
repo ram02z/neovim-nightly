@@ -1,16 +1,15 @@
 name: Build daily
 on:
-  push:
-    branches:
+  branches:
       - master
   # schedule:
-    # - cron: '0 0 1-31 * *'
+  #   - cron: '0 0 1-31 * *'
 
 
 jobs:
   build:
     name: Build neovim
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     container:
       image: 'ghcr.io/void-linux/xbps-src-masterdir:20210313rc01-${{ matrix.config.bootstrap }}'
@@ -18,16 +17,16 @@ jobs:
         PATH: '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/tmp/bin'
         ARCH: '${{ matrix.config.arch }}'
         BOOTSTRAP: '${{ matrix.config.bootstrap }}'
-        
+
     strategy:
       fail-fast: false
       matrix:
         config:
-          # - { arch: x86_64, bootstrap: x86_64 }
+          - { arch: x86_64, bootstrap: x86_64 }
           # - { arch: i686, bootstrap: i686, test: 1 }
           # - { arch: aarch64, bootstrap: x86_64, test: 0 }
           # - { arch: armv7l, bootstrap: x86_64, test: 0 }
-          - { arch: x86_64-musl, bootstrap: x86_64-musl, test: 1 }
+          # - { arch: x86_64-musl, bootstrap: x86_64-musl, test: 1 }
           # - { arch: armv6l-musl, bootstrap: x86_64-musl, test: 0 }
           # - { arch: aarch64-musl, bootstrap: x86_64-musl, test: 0 }
 
@@ -72,19 +71,11 @@ jobs:
       - name: Generate index.html
         run: make tree
 
-      # - name: Fix missing release file
-        # run : make fix_release
-        
-      - name: Check contents of folder
+      - name: Check contents of binkpkgs
         run: ls -la ./void-packages/hostdir/binpkgs
 
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
+      - name: Deploy to Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          target_branch: gh-pages
-          build_dir: void-packages/hostdir/binpkgs
-          jekyll: false
-          verbose: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          branch: gh-pages
+          folder: void-packages/hostdir/binpkgs
