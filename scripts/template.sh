@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 dir=$(pwd)/void-packages
-mkdir -p $dir/srcpkgs/nvim
-ndir=$dir/srcpkgs/nvim
+mkdir -p $dir/srcpkgs/neovim-nightly
+ndir=$dir/srcpkgs/neovim-nightly
 mkdir -p $dir/tmp
 tmp=$dir/tmp
 
@@ -26,10 +26,10 @@ echo "tarfile: $tarfile"
 wget $url -O $tarfile
 sha=$(sha256sum $tarfile | awk '{print $1;}')
 tar xfz $tarfile -C $builddir
-# wrksrc=$(ls $builddir | grep -v '\.')
+wrksrc=$(ls $builddir | grep -v '\.')
 
 echo "sha: $sha"
-# echo "wrksrc: $wrksrc"
+echo "wrksrc: $wrksrc"
 
 cat << EOF > $ndir/template
 # Template file for 'neovim-nightly', the nightly build of 'neovim'
@@ -49,7 +49,7 @@ license="Apache-2.0, custom:Vim"
 homepage="https://neovim.io"
 distfiles="$url>nvim-$version.tar.gz"
 checksum=$sha
-wrksrc="neovim-nightly"
+wrksrc=$wrksrc
 conflicts="neovim"
 alternatives="
  vi:vi:/usr/bin/nvim
