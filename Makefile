@@ -7,7 +7,8 @@ template:
 	bash scripts/template.sh
 
 build:
-	bash scripts/build.sh
+	./void-packages/xbps-src pkg neovim-nightly
+
 
 sign:
 	xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./void-packages/hostdir/binpkgs
