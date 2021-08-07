@@ -3,14 +3,11 @@ all: clone bootstrap template build sign
 clone:
 	bash scripts/clone.sh
 
-bootstrap:
-	./void-packages/xbps-src -m masterdir-x86_64-musl binary-bootstrap x86_64-musl
-
-
 template:
 	bash scripts/template.sh
 
 build:
+	./void-packages/xbps-src -m masterdir-x86_64-musl binary-bootstrap x86_64-musl
 	./void-packages/xbps-src -m masterdir-x86_64-musl pkg neovim-nightly
 
 sign:
