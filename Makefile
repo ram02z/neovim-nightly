@@ -19,7 +19,7 @@ sign:
 tree:
 	bash scripts/tree.sh $$PWD/void-packages/hostdir/binpkgs $$PWD/void-packages/hostdir/binpkgs/ https://ram02z.github.io/neovim-nightly
 
-clean:
-	rm -rf tmp void-packages/tmp void-packages/srcpkgs/nvim
-	./void-packages/xbps-src clean
-	rm void-packages/hostdir/**/*.html
+# clean:
+# 	rm -rf tmp void-packages/tmp void-packages/srcpkgs/nvim
+# 	./void-packages/xbps-src clean
+# 	rm void-packages/hostdir/**/*.html
