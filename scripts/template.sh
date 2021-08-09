@@ -32,21 +32,21 @@ ndir=$dir/srcpkgs/neovim-nightly
 # echo "wrksrc: $wrksrc"
 
 cat << EOF > $ndir/template
-# template file for 'neovim-nightly'
+# Template file for 'neovim-nightly'
 pkgname=neovim-nightly
 version=0.6.0
 revision=1
 wrksrc="neovim-nightly"
 build_style=cmake
 build_helper="qemu"
-configure_args="-dcmake_build_type=relwithdebinfo"
-hostmakedepends="pkg-config gettext gperf luajit lua51-lpeg lua51-mpack"
+configure_args="-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack"
 makedepends="libtermkey-devel libuv-devel libvterm-devel msgpack-devel
- luajit-devel libluv-devel tree-sitter-devel"
+ LuaJIT-devel libluv-devel tree-sitter-devel"
 depends="libvterm>=0.1.0"
-short_desc="fork of vim aiming to improve user experience, plugins and guis"
-maintainer="omar zeghouani <omarzeghouani@gmail.com>"
-license="apache-2.0, custom:vim"
+short_desc="Fork of Vim aiming to improve user experience, plugins and GUIs"
+maintainer="Omar Zeghouani <omarzeghouani@gmail.com>"
+license="Apache-2.0, custom:Vim"
 homepage="https://neovim.io"
 distfiles="https://github.com/neovim/neovim/archive/nightly.tar.gz"
 checksum=e64c87dd660d6a0ad5c0798e4c0e5ca2433f4b99450458e0a4c3cd3c283a913f
@@ -58,10 +58,10 @@ alternatives="
  vim:vim:/usr/bin/nvim
  vim:vim.1:/usr/share/man/man1/nvim.1"
 pre_configure() {
-	vsed -i runtime/cmakelists.txt \
-		-e "s|\".*/bin/nvim|\${cmake_crosscompiling_emulator} &|g"
+	vsed -i runtime/CMakeLists.txt \
+		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
 }
 post_install() {
-	vlicense license
+	vlicense LICENSE
 }
 EOF
