@@ -35,7 +35,7 @@ echo "wrksrc: $wrksrc"
 cat << EOF > $ndir/template
 # Template file for 'neovim-nightly', the nightly build of 'neovim'
 pkgname=neovim-nightly
-version="$version"
+version="$timestamp-$version"
 revision=1
 build_style=cmake
 build_helper="qemu"
