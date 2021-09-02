@@ -16,7 +16,7 @@ url=$(jq -r '.tarball_url' $tmp/release.json)
 long_commit=$(jq -r '.target_commitish' $tmp/release.json)
 
 timestamp=$(date +%s)
-echo "version: $timestamp-$version"
+echo "version: $timestamp.$version"
 echo "url: $url" echo "long_commit: $url"
 
 builddir=$tmp/build
@@ -35,7 +35,7 @@ echo "wrksrc: $wrksrc"
 cat << EOF > $ndir/template
 # Template file for 'neovim-nightly', the nightly build of 'neovim'
 pkgname=neovim-nightly
-version="$timestamp-$version"
+version="$timestamp.$version"
 revision=1
 build_style=cmake
 build_helper="qemu"
