@@ -15,7 +15,8 @@ version=${version##*-}
 url=$(jq -r '.tarball_url' $tmp/release.json)
 long_commit=$(jq -r '.target_commitish' $tmp/release.json)
 
-echo "version: $version"
+timestamp=$(date +%s)
+echo "version: $timestamp-$version"
 echo "url: $url" echo "long_commit: $url"
 
 builddir=$tmp/build
