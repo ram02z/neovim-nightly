@@ -13,7 +13,7 @@ curl \
 version=$(jq -r '.name' $tmp/release.json | sed 's/[^ ]* //')
 if [ $version = "null" ]; then
   echo "No new release"
-  exit 0
+  exit 1
 fi
 version=${version##*-}
 url=$(jq -r '.tarball_url' $tmp/release.json)
