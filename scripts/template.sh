@@ -11,6 +11,10 @@ curl \
   -s -o $tmp/release.json \
   https://api.github.com/repos/neovim/neovim/releases/tags/nightly
 version=$(jq -r '.name' $tmp/release.json | sed 's/[^ ]* //')
+if [ $version = "null" ]; then
+  echo "No new release"
+  exit 0
+fi
 version=${version##*-}
 url=$(jq -r '.tarball_url' $tmp/release.json)
 long_commit=$(jq -r '.target_commitish' $tmp/release.json)
