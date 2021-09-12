@@ -19,6 +19,9 @@ sign:
 tree:
 	bash scripts/tree.sh $$PWD/void-packages/hostdir/binpkgs $$PWD/void-packages/hostdir/binpkgs/ https://ram02z.github.io/neovim-nightly
 
+deploy:
+	bash scripts/deploy.sh
+
 # clean:
 # 	rm -rf tmp void-packages/tmp void-packages/srcpkgs/nvim
 # 	./void-packages/xbps-src clean
