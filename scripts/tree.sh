@@ -14,11 +14,17 @@ echo "rel: $rel"
 echo "urel: $urel"
 echo "out: $out"
 
+
+case "$ARCH" in
+    *musl* ) LIBC="musl" ;;
+    * ) LIBC="glibc" ;;
+esac
+
 cat << EOF > $out
 <html>
-<head><title>Index of /</title></head>
+<head><title>Index of /neovim-nightly/$LIBC</title></head>
 <body>
-<h1>Index of $rel</h1>
+<h1>Index of /neovim-nightly/$LIBC</h1>
 EOF
 if [ "$rel" == "/" ]; then
   echo "<hr><pre><a href="$urel">../</a>" >> $out
@@ -27,8 +33,8 @@ else
 fi
 
 for f in $dir/*;do
-  file=$(basename $f)
-  if [ "$file" == "index.html" ]; then
+  file="$LIBC/$(basename $f)"
+  if [[ "$file" =~ "index.html" ]]; then
       echo "ignored: $file"
       continue
   fi

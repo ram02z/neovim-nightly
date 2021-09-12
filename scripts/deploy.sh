@@ -46,6 +46,31 @@ rm -rf $LIBC
 mkdir -p $LIBC
 cp -Rf $HOME/build/$BUILD_DIR/* $LIBC
 
+# Generate homepage
+cat << EOF > index.html
+<html>
+<head><title>Index of /neovim-nightly</title></head>
+<body>
+<h1>Index of /neovim-nightly</h1>
+<hr><pre><a href="https://ram02z.github.io">../</a>
+EOF
+
+for d in */; do
+    dir=$(basename $d)
+    size=$(du -s $d | awk '{print $1;}')
+    s=$(stat -c %y $d)
+    stat=${s%%.*}
+
+    if [ -d "$d" ]; then
+        printf '<a href="%s">%-40s%35s%20s\n' "$dir" "$dir</a>" "$stat" "$size" >> index.html
+    fi
+done
+
+cat << EOF >> index.html
+</pre><hr></body>
+</html>
+EOF
+
 COMMIT_MESSAGE="$GITHUB_ACTOR published a site update"
 
 # Deploy/Push (or not?)
