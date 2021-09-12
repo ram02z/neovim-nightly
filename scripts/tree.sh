@@ -33,8 +33,8 @@ else
 fi
 
 for f in $dir/*;do
-  file="$LIBC/$(basename $f)"
-  if [[ "$file" =~ "index.html" ]]; then
+  file=$(basename $f)
+  if [ "$file" == "index.html" ]; then
       echo "ignored: $file"
       continue
   fi
@@ -43,12 +43,12 @@ for f in $dir/*;do
   s=$(stat -c %y $f)
   stat=${s%%.*}
   if [ -f "$f" ]; then
-    printf '<a href="%s%s">%-40s%35s%20s\n' "$urel" "$file" "$file</a>" "$stat" "$size" >> $out
+    printf '<a href="%s%s%s">%-40s%35s%20s\n' "$urel" "$LIBC/" "$file" "$file</a>" "$stat" "$size" >> $out
   elif [ -d "$f" ]; then
     echo "---------- recursive ----------"
     bash $0 $root $dir$file/ $url
     echo "---------- recursive ----------"
-    printf '<a href="%s%s">%-40s%35s%20s\n' "$urel" "$file/" "$file/</a>" "$stat" "-" >> $out
+    printf '<a href="%s%s%s">%-40s%35s%20s\n' "$urel" "$LIBC/" "$file/" "$file/</a>" "$stat" "-" >> $out
   fi
 done
 
