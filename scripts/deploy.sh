@@ -24,11 +24,6 @@ cd $HOME/branch/
 git config --global user.name "$GITHUB_ACTOR"
 git config --global user.email "$INPUT_EMAIL"
 
-# Sleep to ensure that latest copy is cloned
-if [ "$LIBC" == "musl" ]; then
-    sleep 120
-fi
-
 if [ -z "$(git ls-remote --heads https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
   echo "Create branch '${TARGET_BRANCH}'"
   git clone --quiet https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
@@ -55,10 +50,10 @@ cp -Rf $HOME/build/$BUILD_DIR/* $LIBC
 # Generate homepage
 cat << EOF > index.html
 <html>
-<head><title>Index of /neovim-nightly</title></head>
+<head><title>Index of /$REPONAME</title></head>
 <body>
-<h1>Index of /neovim-nightly</h1>
-<hr><pre><a href="https://ram02z.github.io">../</a>
+<h1>Index of /$REPONAME</h1>
+<hr><pre><a href="https://$GHIO">../</a>
 EOF
 
 for d in */; do
