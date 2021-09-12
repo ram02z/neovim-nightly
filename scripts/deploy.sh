@@ -41,6 +41,7 @@ fi
 
 # Copy files
 cd $TARGET_BRANCH
+find . -maxdepth 1 -type f -delete
 rm -rf $LIBC
 mkdir -p $LIBC
 cp -Rf $HOME/build/$BUILD_DIR/* $LIBC
