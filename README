@@ -1,3 +1,3 @@
 neovim-nightly builds. (based on https://github.com/lucat1/nvim)
 
-Built for x86_64-musl.
+Built for x86_64 and x86_64-musl.
