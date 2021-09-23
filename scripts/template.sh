@@ -7,6 +7,14 @@ mkdir -p $dir/tmp
 tmp=$dir/tmp
 
 curl \
+  -f -o $tmp/index.html \
+  https://ram02z.github.io/neovim-nightly/glibc/index.html
+
+oldpkg=$(xmllint --html --xpath "//html/body/pre/a[2]" $tmp/index.html | cut -d">" -f2 | cut -d "<" -f1)
+oldversion=${oldpkg##*-}
+oldversion=${oldversion%%.*}
+
+curl \
   -H "Accept: application/vnd.github.v3+json" \
   -s -o $tmp/release.json \
   https://api.github.com/repos/neovim/neovim/releases/tags/nightly
@@ -19,8 +27,19 @@ version=${version##*-}
 url=$(jq -r '.tarball_url' $tmp/release.json)
 long_commit=$(jq -r '.target_commitish' $tmp/release.json)
 
-echo "version: $version"
-echo "url: $url" echo "long_commit: $url"
+echo "old version: $oldversion"
+echo "new version: $version"
+echo "url: $url"
+echo "long_commit: $long_commit"
+
+if [[ "$oldversion" == "${version}_1" ]]; then
+    echo "Same version. Canceling build."
+    exit 2
+fi
+
+if [[ "$oldversion" < "${version}_1" ]]; then
+    oldversion=""
+fi
 
 builddir=$tmp/build
 tarfile=$builddir/neovim-nightly-$version.tar.gz
@@ -38,6 +57,7 @@ echo "wrksrc: $wrksrc"
 cat << EOF > $ndir/template
 # Template file for 'neovim-nightly', the nightly build of 'neovim'
 pkgname=neovim-nightly
+reverts="$oldversion"
 version="$version"
 revision=1
 build_style=cmake
