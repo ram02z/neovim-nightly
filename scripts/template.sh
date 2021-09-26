@@ -16,8 +16,8 @@ curl \
   https://ram02z.github.io/neovim-nightly/$LIBC/index.html
 
 oldpkg=$(xmllint --html --xpath "//html/body/pre/a[2]" $tmp/index.html | cut -d">" -f2 | cut -d "<" -f1)
-oldversion=${oldpkg##*-}
-oldversion=${oldversion%%.*}
+oldversion=${oldpkg%%.*}
+oldversion=${oldversion##*-}
 
 curl \
   -H "Accept: application/vnd.github.v3+json" \
@@ -43,6 +43,7 @@ if [[ "$oldversion" == "${version}_1" ]]; then
 fi
 
 if [[ "$oldversion" < "${version}_1" ]]; then
+    echo "No revert."
     oldversion=""
 fi
 
