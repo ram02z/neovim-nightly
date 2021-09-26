@@ -6,9 +6,14 @@ ndir=$dir/srcpkgs/neovim-nightly
 mkdir -p $dir/tmp
 tmp=$dir/tmp
 
+case "$ARCH" in
+    *musl* ) LIBC="musl" ;;
+    * ) LIBC="glibc" ;;
+esac
+
 curl \
   -f -o $tmp/index.html \
-  https://ram02z.github.io/neovim-nightly/glibc/index.html
+  https://ram02z.github.io/neovim-nightly/$LIBC/index.html
 
 oldpkg=$(xmllint --html --xpath "//html/body/pre/a[2]" $tmp/index.html | cut -d">" -f2 | cut -d "<" -f1)
 oldversion=${oldpkg##*-}
