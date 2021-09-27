@@ -33,16 +33,19 @@ url=$(jq -r '.tarball_url' $tmp/release.json)
 long_commit=$(jq -r '.target_commitish' $tmp/release.json)
 
 echo "old version: $oldversion"
-echo "new version: $version"
+echo "new version: ${version}_1"
 echo "url: $url"
 echo "long_commit: $long_commit"
 
-if [[ "$oldversion" == "${version}_1" ]]; then
+cmpver=$(xbps-uhelper cmpver "$oldversion" "${version}_1")
+cmpver=$?
+
+if [ "$cmpver" -eq 0 ]; then
     echo "Same version. Canceling build."
     exit 2
 fi
 
-if [[ "$oldversion" < "${version}_1" ]]; then
+if [ "$cmpver" -eq 255 ]; then
     echo "No revert."
     oldversion=""
 fi
