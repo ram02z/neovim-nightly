@@ -11,6 +11,7 @@ case "$ARCH" in
     * ) LIBC="glibc" ;;
 esac
 
+# NOTE: xbps-query doesn't seem to want to work
 curl \
   -f -o $tmp/index.html \
   https://ram02z.github.io/neovim-nightly/$LIBC/index.html
