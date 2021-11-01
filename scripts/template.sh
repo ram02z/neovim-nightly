@@ -24,19 +24,17 @@ curl \
   -H "Accept: application/vnd.github.v3+json" \
   -s -o $tmp/release.json \
   https://api.github.com/repos/neovim/neovim/releases/tags/nightly
-version=$(jq -r '.name' $tmp/release.json | sed 's/[^ ]* //')
-if [ $version = "null" ]; then
+if [ "$(jq -r '.name' $tmp/release.json)" = "null" ]; then
   echo "No new release"
   exit 1
 fi
-version=${version##*-}
+version=$(jq -r '.target_commitish' $tmp/release.json)
+version="g${version:0:9}"
 url=$(jq -r '.tarball_url' $tmp/release.json)
-long_commit=$(jq -r '.target_commitish' $tmp/release.json)
 
 echo "old version: $oldversion"
 echo "new version: ${version}_1"
 echo "url: $url"
-echo "long_commit: $long_commit"
 
 cmpver=$(xbps-uhelper cmpver "$oldversion" "${version}_1")
 cmpver=$?
