@@ -23,14 +23,15 @@ oldversion=${oldversion##*-}
 curl \
   -H "Accept: application/vnd.github.v3+json" \
   -s -o $tmp/release.json \
-  https://api.github.com/repos/neovim/neovim/releases/tags/nightly
-if [ "$(jq -r '.name' $tmp/release.json)" = "null" ]; then
-  echo "No new release"
+  https://api.github.com/repos/neovim/neovim/git/ref/tags/nightly
+if [ "$(jq -r '.message' $tmp/release.json)" = "Not Found" ]; then
+  echo "Nightly tag removed?"
   exit 1
 fi
-version=$(jq -r '.target_commitish' $tmp/release.json)
+version=$(jq -r '.object.sha' $tmp/release.json)
 version="g${version:0:9}"
-url=$(jq -r '.tarball_url' $tmp/release.json)
+# This might fail if no release, might need to change the template logic
+url="https://api.github.com/repos/neovim/neovim/tarball/nightly"
 
 echo "old version: $oldversion"
 echo "new version: ${version}_1"
