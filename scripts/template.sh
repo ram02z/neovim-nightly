@@ -95,6 +95,6 @@ pre_configure() {
 		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
 }
 post_install() {
-	vlicense LICENSE
+	vlicense LICENSE.txt
 }
 EOF
