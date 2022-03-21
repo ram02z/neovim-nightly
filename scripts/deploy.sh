@@ -6,7 +6,7 @@ OWNER="ram02z"
 GHIO="${OWNER}.github.io"
 TARGET_BRANCH="gh-pages"
 EMAIL="omarzeghouanii@gmail.com"
-BUILD_DIR="void-packages/hostdir/binpkgs"
+BUILD_DIR="void-packages/hostdir/binpkgs/libluv"
 case "$ARCH" in
     *musl* ) LIBC="musl" ;;
     * ) LIBC="glibc" ;;
