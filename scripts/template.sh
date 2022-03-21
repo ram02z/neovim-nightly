@@ -11,9 +11,6 @@ case "$ARCH" in
     * ) LIBC="glibc" ;;
 esac
 
-# NOTE: temporary fix until libuv is updated
-echo "repository=https://ram02z.github.io/void-templates/$LIBC" > /etc/xbps.d/11-mytemplates.conf
-
 # NOTE: xbps-query doesn't seem to want to work
 curl \
   -f -o $tmp/index.html \
