@@ -6,19 +6,8 @@ ndir=$dir/srcpkgs/neovim-nightly
 mkdir -p $dir/tmp
 tmp=$dir/tmp
 
-case "$ARCH" in
-    *musl* ) LIBC="musl" ;;
-    * ) LIBC="glibc" ;;
-esac
-
-# NOTE: xbps-query doesn't seem to want to work
-curl \
-  -f -o $tmp/index.html \
-  https://ram02z.github.io/neovim-nightly/$LIBC/index.html
-
-oldpkg=$(xmllint --html --xpath "//html/body/pre/a[2]" $tmp/index.html | cut -d">" -f2 | cut -d "<" -f1)
-oldversion=${oldpkg%%.*}
-oldversion=${oldversion##*-}
+oldpkg=$(xbps-query --repository=https://ram02z.github.io/neovim-nightly/$LIBC neovim-nightly -p pkgver)
+oldversion=${oldpkg##*-}
 
 curl \
   -H "Accept: application/vnd.github.v3+json" \
