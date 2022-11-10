@@ -5,7 +5,7 @@ REPONAME="neovim-nightly"
 OWNER="ram02z"
 GHIO="${OWNER}.github.io"
 TARGET_BRANCH="gh-pages"
-EMAIL="omarzeghouanii@gmail.com"
+EMAIL="${GITHUB_ACTOR}@users.noreply.github.com"
 BUILD_DIR="void-packages/hostdir/binpkgs"
 case "$ARCH" in
     *musl* ) LIBC="musl" ;;
