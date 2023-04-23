@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build neovim
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     container:
       image: "ghcr.io/void-linux/xbps-src-masterdir:20230204rc01-${{ matrix.config.bootstrap }}"
