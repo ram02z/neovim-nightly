@@ -61,7 +61,7 @@ revision=1
 build_style=cmake
 build_helper="qemu"
 configure_args="-DCMAKE_BUILD_TYPE=RelWithDebInfo"
-hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack"
+hostmakedepends="pkg-config gettext gperf LuaJIT lua51-mpack"
 makedepends="libtermkey-devel libuv-devel libvterm-devel msgpack-devel LuaJIT-devel
  libluv-devel tree-sitter-devel"
 short_desc="Fork of Vim aiming to improve user experience, plugins and GUIs. Nightly version"
