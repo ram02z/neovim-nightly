@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     container:
-      image: "ghcr.io/void-linux/xbps-src-masterdir:20230204rc01-${{ matrix.config.bootstrap }}"
+      image: "ghcr.io/void-linux/xbps-src-masterdir:20230425rc01-${{ matrix.config.bootstrap }}"
       env:
         PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/tmp/bin"
         ARCH: "${{ matrix.config.arch }}"
