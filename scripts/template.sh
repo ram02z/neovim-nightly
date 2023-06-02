@@ -61,7 +61,7 @@ revision=1
 build_style=cmake
 build_helper="qemu"
 configure_args="-DCMAKE_BUILD_TYPE=RelWithDebInfo"
-hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack"
+hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack lua51-BitOp"
 makedepends="libtermkey-devel libuv-devel libvterm-devel msgpack-devel LuaJIT-devel
  libluv-devel tree-sitter-devel"
 short_desc="Fork of Vim aiming to improve user experience, plugins and GUIs. Nightly version"
@@ -81,6 +81,8 @@ alternatives="
 pre_configure() {
 	vsed -i runtime/CMakeLists.txt \
 		-e "s|\".*/bin/nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
+  vsed -i src/nvim/po/CMakeLists.txt \
+		-e "s|\$<TARGET_FILE:nvim|\${CMAKE_CROSSCOMPILING_EMULATOR} &|g"
 }
 post_install() {
 	vlicense LICENSE.txt
