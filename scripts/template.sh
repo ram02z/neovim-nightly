@@ -60,7 +60,7 @@ version="$version"
 revision=1
 build_style=cmake
 build_helper="qemu"
-configure_args="-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+configure_args="-DCI_BUILD=OFF -DCOMPILE_LUA=OFF -DPREFER_LUA=OFF"
 hostmakedepends="pkg-config gettext gperf LuaJIT lua51-lpeg lua51-mpack lua51-BitOp"
 makedepends="libtermkey-devel libuv-devel libvterm-devel msgpack-devel LuaJIT-devel
  libluv-devel tree-sitter-devel"
